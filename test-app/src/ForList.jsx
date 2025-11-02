@@ -1,26 +1,26 @@
-import './ForList.css';
+import styles from'./ForList.module.css';
 
 export default function ForList({ src }) {
   return (
-    <ul className='posts'>
+    <ul className={styles.posts}>
       {src.map((elem) => {
         const date = new Date(elem.createdAt); // String → Dataに型変換
         const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
         return (
-          <li key={elem.id} className="post">
+          <li key={elem.id} className={styles.post}>
             <a href="">
-              <div className='post-info'>
-                <div className="post-createdAt">{formattedDate}</div>
-                <div className="post-categories">
+              <div className={styles.postInfo}>
+                <div className={styles.postCreatedAt}>{formattedDate}</div>
+                <div>
                   {elem.categories.map((category) => (
-                    <span className="post-category">{category}</span>
+                    <span className={styles.postCategory}>{category}</span>
                   ))}
                 </div>
               </div>              
 
-              <p className="post-title">{elem.title}</p>
-              <p className="post-content">{elem.content}</p>
+              <p className={styles.postTitle}>{elem.title}</p>
+              <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: elem.content }} />
             </a>
           </li>
         );
