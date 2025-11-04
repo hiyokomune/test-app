@@ -1,4 +1,5 @@
 import styles from'./ForList.module.css';
+import { Link } from "react-router-dom";
 
 export default function ForList({ src }) {
   return (
@@ -9,7 +10,7 @@ export default function ForList({ src }) {
 
         return (
           <li key={elem.id} className={styles.post}>
-            <a href="">
+            <Link to ={`post/${elem.id}`}>
               <div className={styles.postInfo}>
                 <div className={styles.postCreatedAt}>{formattedDate}</div>
                 <div>
@@ -21,7 +22,7 @@ export default function ForList({ src }) {
 
               <p className={styles.postTitle}>{elem.title}</p>
               <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: elem.content }} />
-            </a>
+            </Link>
           </li>
         );
       })}
