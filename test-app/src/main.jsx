@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from "react-router-dom";
 import './index.css'
-import posts from './data/posts.js' // post.jsをインポート
-import ForList from './ForList.jsx'
-import Header from './Header.jsx'
+import App from "./App.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Header />
-    <ForList src={posts} />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 )
