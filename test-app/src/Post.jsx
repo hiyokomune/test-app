@@ -7,7 +7,7 @@ export default function Post({}) {
   // /post/:id のidパラメータを取得
   const { id } = useParams();
   // 記事情報をAPIから取得
-  const [ post, setPost ] = useState([]);
+  const [ post, setPost ] = useState(null);
   const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
