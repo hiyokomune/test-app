@@ -1,16 +1,27 @@
 import styles from'./Post.module.css';
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
-export default function Post({ src }) {
+export default function Post({}) {
 
   // /post/:id のidパラメータを取得
   const { id } = useParams();
-  // 該当記事の取り出し
-  const post = src.find((p) => p.id === Number(id));
-  // 該当のidの記事がない場合
-  if(!post){
-    return <div>記事が見つかりません</div>;
-  }
+  // 記事情報をAPIから取得
+  const [ post, setPost ] = useState([]);
+  const [ loading, setLoading ] = useState(true);
+
+  useEffect(() => {
+  const fetcher = async () => {
+      const res = await fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`);
+      const data = await res.json();
+      setPost(data.post);
+      setLoading(false);
+    };
+    fetcher();
+  }, [id]);
+  
+  if (loading) return <div>読み込み中...</div>;
+  if (!post) return <div>記事が見つかりません</div>;  
 
   // ISO 8601形式 → YYYY/MM/DD形式に変換
   const date = new Date(post.createdAt); // String → Dataに型変換
